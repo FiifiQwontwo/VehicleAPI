@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-0!u+pxn2g6py4i2fq#=^sph=3w8_hjvxj3k%t*^o$!%zsrsffs'
+# SECRET_KEY = 'django-insecure-0!u+pxn2g6py4i2fq#=^sph=3w8_hjvxj3k%t*^o$!%zsrsffs'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'accounts',
     'rest_framework',
     'drf-yasg'
+    'django-seed'
 ]
 
 MIDDLEWARE = [
@@ -80,11 +81,18 @@ WSGI_APPLICATION = 'Veh.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': 'ourCare@2022',
+        'HOST': config('DB_HOST'),
+        'PORT': '3309',
+        'OPTIONS': {
+            'sql_mode': 'traditional'
+
+        }
     }
 }
-
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 

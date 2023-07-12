@@ -11,13 +11,14 @@ python 3.9
 
 ```bash
 $ git clone https://github.com/FiifiQwontwo/FoodAPI.git
+
 ```
 
 Then 
 ```bash
 $ cd Foldername
 ```
-create a virtual enviroment to install dependencies
+create a virtual environment to install dependencies
 
 ```bash
 python -m venv venv
