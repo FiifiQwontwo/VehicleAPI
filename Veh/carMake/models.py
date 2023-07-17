@@ -1,5 +1,6 @@
 from django.db import models
-from django.utils import fileziseformat
+from django.core.exceptions import ValidationError
+from django.core.validators import FileExtensionValidator
 
 
 # Create your models here.
@@ -16,5 +17,6 @@ class VehicleMake(models.Model):
     def clean(self):
         if self.logo:
             # Check the image width and height here if needed
-            if self.logo.size > 52428800:
+            max_size = 1 * 1024 * 1024 * 1024
+            if self.logo.size > max_size:
                 raise ValidationError("Image file too large ( > 50MB )")
