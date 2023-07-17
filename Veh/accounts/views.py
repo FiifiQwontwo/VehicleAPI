@@ -6,6 +6,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
+import jwt
 
 
 class RegistrationView(APIView):
@@ -94,6 +95,13 @@ class LoginView(APIView):
         user = authenticate(request, email=email, password=password)
         if user is not None:
             login(request, user)
+            # payload = {
+            #     'id': user.id,
+            #     'exp': datetime.datetime.utcnow + datetime.timedelta(minutes=30),
+            #     'iat': datetime.datetime.utcnow()
+            # }
+            #
+            # token = jwt.encode(payload, 'secret', algorithm='HS256').decode('utf-8')
             return Response({'msg': 'Login Success'}, status=status.HTTP_200_OK)
         return Response({'msg': 'Invalid Credentials'}, status=status.HTTP_401_UNAUTHORIZED)
 

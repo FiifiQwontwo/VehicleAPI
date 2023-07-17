@@ -43,9 +43,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     'rest_framework',
-    'drf_yasg',
-    'django_seed',
-    'rest_framework_simplejwt'
+    'drf_yasg', # automatically generated swagger
+    'django_seed',  # using it to seed  models data
+    'rest_framework_simplejwt',
+    'carMake',
 ]
 
 MIDDLEWARE = [
@@ -144,9 +145,9 @@ REST_FRAMEWORK = {
 
 AUTH_USER_MODEL = 'accounts.Account'
 
-SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=15),
-    'ROTATE_REFRESH_TOKENS': 'True',
-    'BLACKLIST_REFRESH_TOKENS': 'True',
-}
+# SIMPLE_JWT = {
+#     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),
+#     'REFRESH_TOKEN_LIFETIME': timedelta(days=15),
+#     'ROTATE_REFRESH_TOKENS': 'True',
+#     'BLACKLIST_REFRESH_TOKENS': 'True',
+# }
