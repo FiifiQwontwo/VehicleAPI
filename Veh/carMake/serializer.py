@@ -2,13 +2,13 @@ from rest_framework import serializers
 from .models import VehicleMake
 
 
-class ListVehicleSerializers(serializers.ModelSerializers):
+class ListVehicleSerializers(serializers.ModelSerializer):
     class Meta:
         model = VehicleMake
         fields = ('make_name', 'logo')
 
 
-class CreateVehicleSerializers(serializers.ModelSerializers):
+class CreateVehicleSerializers(serializers.ModelSerializer):
     class Meta:
         model = VehicleMake
         fields = ('make_name', 'logo')
