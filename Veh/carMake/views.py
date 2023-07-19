@@ -41,3 +41,33 @@ class VehicleList(APIView):
         vehicle = VehicleMake.objects.all()
         serializer = ListVehicleSerializers(vehicle, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class CreateVehicle(APIView):
+
+    @swagger_auto_schema(
+        operation_description="New Vehicle",
+        request_body=openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            required=['make_name', 'logo'],
+            properties={
+                'make_name': openapi.Schema(type=openapi.TYPE_STRING),
+                'logo': openapi.Schema(type=openapi.TYPE_STRING, format=openapi.FORMAT_BINARY),
+
+            }
+        ),
+        responses={
+            201: 'Created',
+            400: 'Bad Request',
+            401: 'Unauthorized',
+            403: 'Forbidden',
+            500: 'Internal Server Error',
+
+        }
+    )
+    def post(self, request):
+        serializer = CreateVehicleSerializers(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
