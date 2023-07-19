@@ -19,4 +19,8 @@ class VehicleMake(models.Model):
             # Check the image width and height here if needed
             max_size = 1 * 1024 * 1024 * 1024
             if self.logo.size > max_size:
-                raise ValidationError("Image file too large ( > 50MB )")
+                raise ValidationError("Image file too large ( > 1GB )")
+
+    def __str__(self):
+        return self.make_name
+
