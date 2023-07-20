@@ -6,7 +6,7 @@ from django.core.validators import FileExtensionValidator
 # Create your models here.
 
 class VehicleMake(models.Model):
-    make_name = models.CharField(max_length=100)
+    make_name = models.CharField(max_length=100, unique=True)
     logo = models.ImageField(blank=True, upload_to='vehicleMake/%Y/%m/%d/',
                              validators=[
                                  FileExtensionValidator(
@@ -23,4 +23,3 @@ class VehicleMake(models.Model):
 
     def __str__(self):
         return self.make_name
-
