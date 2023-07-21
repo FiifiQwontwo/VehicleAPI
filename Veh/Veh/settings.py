@@ -43,10 +43,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     'rest_framework',
-    'drf_yasg', # automatically generated swagger
+    'drf_yasg',  # automatically generated swagger
     'django_seed',  # using it to seed  models data
     'rest_framework_simplejwt',
     'carMake',
+    'fuel_type',
 ]
 
 MIDDLEWARE = [
