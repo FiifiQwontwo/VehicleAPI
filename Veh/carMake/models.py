@@ -11,6 +11,9 @@ class VehicleMake(models.Model):
                              validators=[
                                  FileExtensionValidator(
                                      allowed_extensions=['jpeg ', 'png', 'jpg', 'webm'])])
+    is_car = models.BooleanField(default=False)
+    is_motor = models.BooleanField(default=False)
+    is_tractor = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
