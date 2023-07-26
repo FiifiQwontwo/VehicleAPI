@@ -30,7 +30,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=True, cast=bool)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -43,10 +43,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     'rest_framework',
-    'drf_yasg', # automatically generated swagger
+    'drf_yasg',  # automatically generated swagger
     'django_seed',  # using it to seed  models data
     'rest_framework_simplejwt',
     'carMake',
+    'fuel_type',
 ]
 
 MIDDLEWARE = [

@@ -7,10 +7,13 @@ from django.core.validators import FileExtensionValidator
 
 class VehicleMake(models.Model):
     make_name = models.CharField(max_length=100, unique=True)
-    logo = models.ImageField(blank=True, upload_to='vehicleMake/%Y/%m/%d/',
+    logo = models.ImageField(blank=True, null=True, upload_to='vehicleMake/%Y/%m/%d/',
                              validators=[
                                  FileExtensionValidator(
                                      allowed_extensions=['jpeg ', 'png', 'jpg', 'webm'])])
+    is_car = models.BooleanField(default=False)
+    is_motor = models.BooleanField(default=False)
+    is_tractor = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

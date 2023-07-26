@@ -5,7 +5,28 @@ from .models import VehicleMake
 class ListVehicleSerializers(serializers.ModelSerializer):
     class Meta:
         model = VehicleMake
-        fields = ('make_name', 'logo')
+        fields = ('id', 'make_name', 'logo', 'is_car', 'is_motor', 'is_tractor')
+
+
+class VehicleMakeDetailsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = VehicleMake
+        fields = ('id', 'make_name', 'logo', 'is_car', 'is_motor', 'is_tractor')
+
+
+class UpdateVehicleSerializer(serializers.ModelSerializer):
+    logo = serializers.FileField(required=False)
+
+    class Meta:
+        model = VehicleMake
+        fields = '__all__'
+
+    def update(self, instance, validated_data):
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+        instance.save()
+
+        return instance
 
 
 class CreateVehicleSerializers(serializers.ModelSerializer):
@@ -13,7 +34,7 @@ class CreateVehicleSerializers(serializers.ModelSerializer):
 
     class Meta:
         model = VehicleMake
-        fields = ('make_name', 'logo')
+        fields = ('make_name', 'logo', 'is_car', 'is_motor', 'is_tractor')
 
     def generate_filename(self, make_name, image_extension):
         # Generate a unique filename based on the model name
@@ -23,6 +44,9 @@ class CreateVehicleSerializers(serializers.ModelSerializer):
     def save(self, **kwargs):
         make_name = self.validated_data.get('make_name')
         logo = self.validated_data.get('logo')
+        is_car = self.validated_data.get('is_car')
+        is_motor = self.validated_data.get('is_motor')
+        is_tractor = self.validated_data.get('is_tractor')
 
         if make_name and logo:
             image_extension = logo.name.split('.')[-1]
@@ -32,6 +56,9 @@ class CreateVehicleSerializers(serializers.ModelSerializer):
             new_vehicle = VehicleMake(
                 make_name=make_name,
                 logo=logo,
+                is_car=is_car,
+                is_tractor=is_tractor,
+                is_motor=is_motor,
             )
             new_vehicle.save()
             return new_vehicle
