@@ -64,20 +64,20 @@ class CreateVehicleSerializers(serializers.ModelSerializer):
             return new_vehicle
 
 
-class DeleteVehicleSerializer(serializers.Serializer):
-    id = serializers.IntegerField()
-
-    def validate_id(self, value):
-        try:
-            vehicle = VehicleMake.objects.get(id=value)
-        except VehicleMake.DoesNotExist:
-            raise serializers.ValidationError("Vehicle not found.")
-        return value
-
-    def delete_vehicle(self):
-        vehicle_id = self.validated_data['id']
-        try:
-            vehicle = VehicleMake.objects.get(id=vehicle_id)
-            vehicle.delete()
-        except VehicleMake.DoesNotExist:
-            raise serializers.ValidationError("Vehicle not found.")
+# class DeleteVehicleSerializer(serializers.Serializer):
+#     id = serializers.IntegerField()
+#
+#     def validate_id(self, value):
+#         try:
+#             vehicle = VehicleMake.objects.get(id=value)
+#         except VehicleMake.DoesNotExist:
+#             raise serializers.ValidationError("Vehicle not found.")
+#         return value
+#
+#     def delete_vehicle(self):
+#         vehicle_id = self.validated_data['id']
+#         try:
+#             vehicle = VehicleMake.objects.get(id=vehicle_id)
+#             vehicle.delete()
+#         except VehicleMake.DoesNotExist:
+#             raise serializers.ValidationError("Vehicle not found.")

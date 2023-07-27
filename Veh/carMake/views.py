@@ -39,7 +39,7 @@ class VehicleList(APIView):
 
             ),
             400: 'Bad Request',
-            401: "Unautorized Request",
+            401: "Unauthorized Request",
             403: "Forbidden",
             500: "Internal Server Error",
         }
