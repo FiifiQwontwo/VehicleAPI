@@ -56,7 +56,7 @@ class FuelDetails(APIView):
         except Fuel.DoesNotExist:
             return Response({"Error": "Fuel Type not Found"}, status=status.HTTP_404_NOT_FOUND)
 
-
+# continue to work with it
 # class CreateFuelAPI(APIView):
 #
 #     @swagger_auto_schema(
