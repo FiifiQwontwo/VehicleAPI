@@ -55,3 +55,18 @@ class FuelDetails(APIView):
             return Response(serializer.data, status=status.HTTP_200_OK)
         except Fuel.DoesNotExist:
             return Response({"Error": "Fuel Type not Found"}, status=status.HTTP_404_NOT_FOUND)
+
+
+# class CreateFuelAPI(APIView):
+#
+#     @swagger_auto_schema(
+#         operation_description = "New Fuel",
+#         request_body=openapi.Schema(
+#             type=openapi.TYPE_OBJECT,
+#             required=['fuel_type'],
+#             properties={
+#                 'fuel_type':openapi.Schema(type=openapi.TYPE_STRING),
+#             }
+#         )
+#     )
+#     def
