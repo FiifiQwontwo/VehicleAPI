@@ -273,6 +273,7 @@ class UpdateVehicleMake(UpdateAPIView):
             type=openapi.TYPE_OBJECT,
             required=['make_name', 'logo', 'is_car', 'is_tractor', 'is_motor'],
             properties={
+                'make_name': openapi.Schema(type=openapi.TYPE_STRING, description='Name of the vehicle'),
                 'status': openapi.Schema(type=openapi.TYPE_STRING),
                 'logo': openapi.Schema(type=openapi.TYPE_STRING, format=openapi.FORMAT_BINARY),
                 'is_car': openapi.Schema(type=openapi.TYPE_STRING, description='is car'),
@@ -285,7 +286,7 @@ class UpdateVehicleMake(UpdateAPIView):
             400: 'Bad Request',
             401: 'Unauthorized',
             403: 'Forbidden',
-            404: 'Delivery not found',
+            404: 'Vehicle Make not found',
             500: 'Internal Server Error',
         }
     )

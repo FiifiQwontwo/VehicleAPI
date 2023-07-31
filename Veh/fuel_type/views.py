@@ -92,22 +92,22 @@ class UpdateFuelAPI(UpdateAPIView):
     serializer_class = UpdateFuelSerializer
 
     @swagger_auto_schema(
-        operation_description="Update Fuel Types",
+        operation_description="Update an existing Fuel Type ",
         request_body=openapi.Schema(
             type=openapi.TYPE_OBJECT,
-            required=['fuel_type', ],
+            required=['fuel_type'],
             properties={
-                'fuel_type': openapi.Schema(type=openapi.TYPE_STRING),
-
+                'fuel_type': openapi.Schema(type=openapi.TYPE_STRING, description='fuel type'),
             }
+
         ),
         responses={
-            200: 'Fuel Types updated successfully',
-            400: "Bad Request",
-            401: "Unauthorized",
-            403: "Forbidden",
-            404: "Not Found",
-            500: "Internal Server Error",
+            200: 'Fuel_type  updated successfully',
+            400: 'Bad Request',
+            401: 'Unauthorized',
+            403: 'Forbidden',
+            404: 'Fuel_type not found',
+            500: 'Internal Server Error',
         }
     )
     def put(self, request, *args, **kwargs):
