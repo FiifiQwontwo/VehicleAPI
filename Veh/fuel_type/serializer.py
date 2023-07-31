@@ -11,7 +11,7 @@ class ListFuelSerializer(serializers.ModelSerializer):
 class CreateFuelSerializer(serializers.ModelSerializer):
     class Meta:
         model = Fuel
-        fields = ('fuel_type')
+        fields = ('fuel_type',)
 
     def save(self, *args, **kwargs):
         fuel_type = self.validated_data.get('fuel_type')
@@ -26,7 +26,7 @@ class CreateFuelSerializer(serializers.ModelSerializer):
 class UpdateFuelSerializer(serializers.ModelSerializer):
     class Meta:
         model = Fuel
-        fields = '__all__'
+        fields = '__all__',
 
     def update(self, instance, validated_data):
         for attrs, value in validated_data.items():

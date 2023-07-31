@@ -34,10 +34,10 @@ class VehicleMakeAdmin(admin.ModelAdmin):
         return format_html('<img src="{}" width="30" style="border_radius:50%;">'.format(object.logo.url))
 
     thumbnails.short_description = 'logo'
-    list_display = ('thumbnails', 'make_name')
+    list_display = ('thumbnails', 'make_name', 'created_at', 'updated_at',)
     list_display_links = ('make_name',)
 
 
 @admin.register(Fuel)
 class FuelAdmin(admin.ModelAdmin):
-    list_display = ('fuel_type',)
+    list_display = ('fuel_type', 'created_at', 'updated_at',)

@@ -321,7 +321,7 @@ class VehicleMakeDelete(APIView):
     def delete(self, request, pk):
         try:
             make = VehicleMake.objects.get(pk=pk)
+            make.delete()
+            return Response({'Message': "Vehicle deleted"}, status=status.HTTP_204_NO_CONTENT)
         except VehicleMake.DoesNotExist:
-            return Response({Error: "Vehicle not found"}, status=status.HTTP_404_NOT_FOUND)
-        make.delete()
-        return Response({'Message': "Vehicle deleted"}, status=status.HTTP_204_NO_CONTENT)
+            return Response({'Error': "Vehicle not found"}, status=status.HTTP_404_NOT_FOUND)

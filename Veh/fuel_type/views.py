@@ -123,10 +123,10 @@ class DeleteFuelType(APIView):
             404: "Fuel Type Not Found",
         }
     )
-    def delete(self, pk):
+    def delete(self, request, pk):
         try:
             fuel = Fuel.objects.get(pk=pk)
+            fuel.delete()
+            return Response({'Message': "Fuel Type Deleted"}, status=status.HTTP_204_NO_CONTENT)
         except Fuel.DoesNotExist:
-            return Response({Error: "Fuel Type Not Found"}, status=status.HTTP_404_NOT_FOUND)
-        fuel.delete()
-        return Response({Error: "Fuel Type Deleted"}, status=status.HTTP_204_NO_CONTENT)
+            return Response({Error: "Fuel Type Deleted"}, status=status.HTTP_204_NO_CONTENT)
