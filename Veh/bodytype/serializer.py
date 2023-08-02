@@ -16,7 +16,7 @@ class CreateBodyType(serializers.ModelSerializer):
         fields = ('id', 'body_type', 'picture', 'description')
 
     def generatefilename(self, body_type, image_extension):
-        filename = f"{body_type.replace('', '_').lower()}.{image_extension}"
+        filename = f"{body_type.replace(' ', '_').lower()}.{image_extension}"
         return filename
 
     def save(self, *args, **kwargs):
@@ -26,10 +26,10 @@ class CreateBodyType(serializers.ModelSerializer):
 
         if body_type and picture:
             image_extension = picture.name.split('.')[-1]
-            filename = self.generatefilename(body_type, image_extension)
-            picture.name = filename
+            filename = self.generatefilename(body_type.encode('utf-8'), image_extension.encode('utf-8'))
+            picture.name = filename.decode('utf-8')
 
-            new_body =BodyType(
+            new_body = BodyType(
                 body_type=body_type,
                 picture=picture,
                 description=description,
