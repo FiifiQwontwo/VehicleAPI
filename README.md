@@ -23,6 +23,7 @@ create a virtual environment to install dependencies
 ```bash
 python -m venv venv
 ./venv/Scripts/activate
+cd Veh
 ```
 Then install the dependencies:
 ```bash
@@ -43,6 +44,7 @@ and navigate to http://localhost:8000/swagger/ to read the API documentation
     Python - Language Used
     Django - The web framework used
     SQLite & MYSQL - Database used(used MYSQL for development and used SQLite for Demo
+    you can request for the data 
     
 
 
