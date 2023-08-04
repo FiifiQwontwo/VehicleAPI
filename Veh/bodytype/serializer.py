@@ -9,15 +9,9 @@ class ListBodySerializer(serializers.ModelSerializer):
 
 
 class CreateBodyType(serializers.ModelSerializer):
-    picture = serializers.FileField(required=True)
-
     class Meta:
         model = BodyType
         fields = ('id', 'body_type', 'picture', 'description')
-
-    def generatefilename(self, body_type, image_extension):
-        filename = f"{body_type.replace(' ', '_').lower()}.{image_extension}"
-        return filename
 
     def save(self, *args, **kwargs):
         body_type = self.validated_data.get('body_type')
@@ -25,10 +19,6 @@ class CreateBodyType(serializers.ModelSerializer):
         description = self.validated_data.get('description')
 
         if body_type and picture:
-            image_extension = picture.name.split('.')[-1]
-            filename = self.generatefilename(body_type.encode('utf-8'), image_extension.encode('utf-8'))
-            picture.name = filename.decode('utf-8')
-
             new_body = BodyType(
                 body_type=body_type,
                 picture=picture,
@@ -37,3 +27,17 @@ class CreateBodyType(serializers.ModelSerializer):
             new_body.save()
             return new_body
 
+
+class UpdateBodyTypeSerializer(serializers.ModelSerializer):
+    picture = serializers.FileField(required=False)
+
+    class Meta:
+        model = BodyType
+        fields = '__all__'
+
+    def update(self, instance, validated_data):
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+        instance.save()
+
+        return instance
