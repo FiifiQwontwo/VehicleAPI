@@ -45,10 +45,6 @@ class BodyTypeList(APIView):
 
 #
 class BodyCreateAPI(APIView):
-    # using the parser to handle the file uploads and the change in the picture property in the swagger_auto_schema
-    # definition to use openapi.TYPE_FILE instead of openapi.TYPE_STRING. This should properly handle the file upload and
-    # avoid the decoding error you were encountering.
-    # parser_classes = (MultiPartParser, FormParser)
 
     @swagger_auto_schema(
         operation_description="New Body Type",
@@ -110,16 +106,16 @@ class UpdateBodyTypeAPI(UpdateAPIView):
 class BodyTypeDetails(APIView):
 
     @swagger_auto_schema(
-        operation_description ="Body Type Details",
-        response ={
+        operation_description="Body Type Details",
+        response={
             200: ListBodySerializer(),
             404: 'Body Type Not Found',
         }
     )
     def get(self, request, pk):
         try:
-            body =BodyType.objects.get(pk=pk)
+            body = BodyType.objects.get(pk=pk)
             serializer = ListBodySerializer(body)
             return Response(serializer.data, status=status.HTTP_200_OK)
         except BodyType.DoesNotExist:
-            return Response({'Error': 'Body_type not found'},status=status.HTTP_404_NOT_FOUND)
+            return Response({'Error': 'Body_type not found'}, status=status.HTTP_404_NOT_FOUND)
