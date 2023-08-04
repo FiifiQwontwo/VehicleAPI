@@ -23,6 +23,7 @@ create a virtual environment to install dependencies
 ```bash
 python -m venv venv
 ./venv/Scripts/activate
+cd Veh
 ```
 Then install the dependencies:
 ```bash
