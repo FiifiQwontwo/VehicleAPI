@@ -119,3 +119,20 @@ class BodyTypeDetails(APIView):
             return Response(serializer.data, status=status.HTTP_200_OK)
         except BodyType.DoesNotExist:
             return Response({'Error': 'Body_type not found'}, status=status.HTTP_404_NOT_FOUND)
+
+
+class BodyTypeDeleteAPI(APIView):
+    @swagger_auto_schema(
+        operation_description ="Delete a body type",
+        response ={
+            204: "Body Type deleted",
+            404: "Body Type not found",
+        }
+    )
+    def delete(self, request, pk):
+        try:
+            by =BodyType.objects.get(pk=pk)
+            by.delete()
+            return Response({'Messsage':'Body Type Deleted'}, status=status.HTTP_204_NO_CONTENT)
+        except BodyType.DoesNotExist:
+            return Response({'Error':"BodyType  not found"}, status=status.HTTP_404_NOT_FOUND)
