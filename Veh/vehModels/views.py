@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import VehicleModel
-from .serailizer import ModelListSerializer
+from .serializer import ModelListSerializer
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
