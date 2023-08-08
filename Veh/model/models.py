@@ -8,7 +8,7 @@ from django.core.validators import FileExtensionValidator
 class VehicleModel(models.Model):
     make_id = models.ForeignKey(VehicleMake, on_delete=models.CASCADE, related_name="makes")
     model_name = models.CharField(max_length=255)
-    logo = models.ImageField(blank=True, null=True, upload_to='vehicleMake/%Y/%m/%d/',
+    picture = models.ImageField(blank=True, null=True, upload_to='vehicleMake/%Y/%m/%d/',
                              validators=[
                                  FileExtensionValidator(
                                      allowed_extensions=['jpeg ', 'png', 'jpg', 'webm'])])
@@ -16,10 +16,10 @@ class VehicleModel(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def clean(self):
-        if self.logo:
+        if self.picture:
             # Check the image width and height here if needed
             max_size = 1 * 1024 * 1024 * 1024
-            if self.logo.size > max_size:
+            if self.picture.size > max_size:
                 raise ValidationError("Image file too large ( > 1GB )")
 
     def __str__(self):
