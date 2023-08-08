@@ -6,7 +6,7 @@ from django.core.validators import FileExtensionValidator
 
 # Create your models here.
 class VehicleModel(models.Model):
-    make_id = models.ForeignKey(VehicleMake, on_delete=models.CASCADE, related_name="makes")
+    make_name = models.ForeignKey(VehicleMake, on_delete=models.CASCADE, related_name="make_name")
     model_name = models.CharField(max_length=255)
     picture = models.ImageField(blank=True, null=True, upload_to='vehicleMake/%Y/%m/%d/',
                              validators=[
