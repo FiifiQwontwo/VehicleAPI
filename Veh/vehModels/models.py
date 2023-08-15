@@ -6,7 +6,7 @@ from django.core.validators import FileExtensionValidator
 
 # Create your models here.
 class VehicleModel(models.Model):
-    make = models.ForeignKey(VehicleMake, on_delete=models.CASCADE, related_name="model_make")
+    make = models.ForeignKey(VehicleMake, on_delete=models.CASCADE, related_name="models")
     model_name = models.CharField(max_length=255)
     picture = models.ImageField(blank=True, null=True, upload_to='vehicleMake/%Y/%m/%d/',
                              validators=[
@@ -23,5 +23,5 @@ class VehicleModel(models.Model):
                 raise ValidationError("Image file too large ( > 1GB )")
 
     def __str__(self):
-        return self.make_name
+        return self.model_name
 
