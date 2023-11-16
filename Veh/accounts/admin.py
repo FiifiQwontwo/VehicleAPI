@@ -4,6 +4,7 @@ from .models import Account
 from carMake.models import VehicleMake
 from django.utils.html import format_html
 from fuel_type.models import Fuel
+from vehModels.models import VehicleModel
 
 # Register your models here.
 
@@ -41,3 +42,13 @@ class VehicleMakeAdmin(admin.ModelAdmin):
 @admin.register(Fuel)
 class FuelAdmin(admin.ModelAdmin):
     list_display = ('fuel_type', 'created_at', 'updated_at',)
+
+
+@admin.register(VehicleModel)
+class VehicleModelAdmin(admin.ModelAdmin):
+    def thumbnails(self, object):
+        return format_html('<img src="{}" width="30" style="border_radius:50%;">'.format(object.picture.url))
+
+    thumbnails.short_description = 'picture'
+    list_display = ('make', 'model_name', 'thumbnails',)
+    list_display_links = ('make','model_name',)

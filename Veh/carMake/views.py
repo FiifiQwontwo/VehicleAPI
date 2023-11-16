@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from rest_framework import status
 from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
@@ -9,12 +10,17 @@ from .serializer import ListVehicleSerializers, VehicleMakeDetailsSerializer, Up
 from .models import VehicleMake
 from rest_framework.generics import UpdateAPIView
 from django.db.models import Q
+from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework.decorators import permission_classes
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 
 
 # Create your views here.
 
 
 class VehicleList(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
     @swagger_auto_schema(
         operation_description="List all Vehicles",
         responses={
@@ -25,7 +31,9 @@ class VehicleList(APIView):
                     items=openapi.Schema(
                         type=openapi.TYPE_OBJECT,
                         properties={
-                            'make_name': openapi.Schema(type=openapi.TYPE_STRING, description='name of vehicle'),
+                            'make_name': openapi.Schema(type=openapi.TYPE_STRING,
+                                                        description='Manufacturer name (e.g., Toyota, '
+                                                                    'Ford)'),
                             'logo': openapi.Schema(type=openapi.TYPE_STRING, format=openapi.FORMAT_BINARY,
                                                    description='logo'),
                             'is_car': openapi.Schema(type=openapi.TYPE_STRING, description='is car'),
@@ -61,7 +69,9 @@ class CarList(APIView):
                     items=openapi.Schema(
                         type=openapi.TYPE_OBJECT,
                         properties={
-                            'make_name': openapi.Schema(type=openapi.TYPE_STRING, description='name of vehicle'),
+                            'make_name': openapi.Schema(type=openapi.TYPE_STRING,
+                                                        description='Manufacturer name (e.g., Toyota, '
+                                                                    'Ford)'),
                             'logo': openapi.Schema(type=openapi.TYPE_STRING, format=openapi.FORMAT_BINARY,
                                                    description='logo'),
                             'is_car': openapi.Schema(type=openapi.TYPE_STRING, description='is car'),
@@ -97,7 +107,9 @@ class MotorList(APIView):
                     items=openapi.Schema(
                         type=openapi.TYPE_OBJECT,
                         properties={
-                            'make_name': openapi.Schema(type=openapi.TYPE_STRING, description='name of vehicle'),
+                            'make_name': openapi.Schema(type=openapi.TYPE_STRING, description='Manufacturer name ('
+                                                                                              'e.g., Toyota,'
+                                                                                              'Ford)'),
                             'logo': openapi.Schema(type=openapi.TYPE_STRING, format=openapi.FORMAT_BINARY,
                                                    description='logo'),
                             # 'is_car': openapi.Schema(type=openapi.TYPE_STRING, description='is car'),
@@ -133,7 +145,9 @@ class TractorList(APIView):
                     items=openapi.Schema(
                         type=openapi.TYPE_OBJECT,
                         properties={
-                            'make_name': openapi.Schema(type=openapi.TYPE_STRING, description='name of vehicle'),
+                            'make_name': openapi.Schema(type=openapi.TYPE_STRING,
+                                                        description='Manufacturer name (e.g., Toyota, '
+                                                                    'Ford)'),
                             'logo': openapi.Schema(type=openapi.TYPE_STRING, format=openapi.FORMAT_BINARY,
                                                    description='logo'),
                             # 'is_car': openapi.Schema(type=openapi.TYPE_STRING, description='is car'),
@@ -169,7 +183,9 @@ class MotorCarList(APIView):
                     items=openapi.Schema(
                         type=openapi.TYPE_OBJECT,
                         properties={
-                            'make_name': openapi.Schema(type=openapi.TYPE_STRING, description='name of vehicle'),
+                            'make_name': openapi.Schema(type=openapi.TYPE_STRING,
+                                                        description='Manufacturer name (e.g., Toyota, '
+                                                                    'Ford)'),
                             'logo': openapi.Schema(type=openapi.TYPE_STRING, format=openapi.FORMAT_BINARY,
                                                    description='logo'),
                             'is_car': openapi.Schema(type=openapi.TYPE_STRING, description='is car'),
@@ -205,7 +221,9 @@ class TractorCarList(APIView):
                     items=openapi.Schema(
                         type=openapi.TYPE_OBJECT,
                         properties={
-                            'make_name': openapi.Schema(type=openapi.TYPE_STRING, description='name of vehicle'),
+                            'make_name': openapi.Schema(type=openapi.TYPE_STRING,
+                                                        description='Manufacturer name (e.g., Toyota, '
+                                                                    'Ford)'),
                             'logo': openapi.Schema(type=openapi.TYPE_STRING, format=openapi.FORMAT_BINARY,
                                                    description='logo'),
                             'is_car': openapi.Schema(type=openapi.TYPE_STRING, description='is car'),
@@ -230,6 +248,8 @@ class TractorCarList(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
+
+@permission_classes([IsAdminUser])
 class CreateVehicle(APIView):
 
     @swagger_auto_schema(
@@ -238,7 +258,8 @@ class CreateVehicle(APIView):
             type=openapi.TYPE_OBJECT,
             required=['make_name', 'logo', 'is_car', 'is_tractor', 'is_motor'],
             properties={
-                'make_name': openapi.Schema(type=openapi.TYPE_STRING),
+                'make_name': openapi.Schema(type=openapi.TYPE_STRING, description='Manufacturer name (e.g., Toyota, '
+                                                                                  'Ford)'),
                 'logo': openapi.Schema(type=openapi.TYPE_STRING, format=openapi.FORMAT_BINARY),
                 'is_car': openapi.Schema(type=openapi.TYPE_STRING, description='is car'),
                 'is_tractor': openapi.Schema(type=openapi.TYPE_STRING, description='is tractor'),
@@ -273,7 +294,8 @@ class UpdateVehicleMake(UpdateAPIView):
             type=openapi.TYPE_OBJECT,
             required=['make_name', 'logo', 'is_car', 'is_tractor', 'is_motor'],
             properties={
-                'make_name': openapi.Schema(type=openapi.TYPE_STRING, description='Name of the vehicle'),
+                'make_name': openapi.Schema(type=openapi.TYPE_STRING, description='Manufacturer name (e.g., Toyota, '
+                                                                                  'Ford)'),
                 'status': openapi.Schema(type=openapi.TYPE_STRING),
                 'logo': openapi.Schema(type=openapi.TYPE_STRING, format=openapi.FORMAT_BINARY),
                 'is_car': openapi.Schema(type=openapi.TYPE_STRING, description='is car'),
