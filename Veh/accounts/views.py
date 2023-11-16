@@ -7,6 +7,8 @@ from rest_framework.response import Response
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 import jwt
+from rest_framework.decorators import permission_classes
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 
 
 class RegistrationView(APIView):
@@ -105,7 +107,7 @@ class LoginView(APIView):
             return Response({'msg': 'Login Success'}, status=status.HTTP_200_OK)
         return Response({'msg': 'Invalid Credentials'}, status=status.HTTP_401_UNAUTHORIZED)
 
-
+@permission_classes([IsAuthenticated, IsAdminUser])
 class UserList(APIView):
     @swagger_auto_schema(
         operation_description="List Users",

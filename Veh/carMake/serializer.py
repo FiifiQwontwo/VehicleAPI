@@ -40,7 +40,6 @@ class CreateVehicleSerializers(serializers.ModelSerializer):
         fields = ('make_name', 'logo', 'is_car', 'is_motor', 'is_tractor')
 
     def generate_filename(self, make_name, image_extension):
-        # Generate a unique filename based on the model name
         filename = f"{make_name.replace(' ', '_').lower()}.{image_extension}"
         return filename
 
