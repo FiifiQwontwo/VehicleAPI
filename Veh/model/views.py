@@ -17,6 +17,28 @@ class ListModels(APIView):
 
     @swagger_auto_schema(
         operation_description = "List models",
+        responses = {
+            200:openapi.Response(
+                description = "OK",
+                schema = openapi.Schema(
+                    type =openapi.TYPE_ARRAY,
+                    items =openapi.Schema(
+                        type =openapi.TYPE_OBJECT,
+                        properties ={
+                            'make': openapi.Schema(type =openapi.TYPE_STRING,description='Manufacturer name (e.g., Toyota, '
+                                                                    'Ford)'),
+                            'model_name': openapi.Schema(type =openapi.TYPE_STRING, description='Model name'),
+                            'picture': openapi.Schema(type =openapi.TYPE_STRING, format =openapi.FORMAT_BINARY, description='Picture')
+
+                        },
+                    ),
+                ),
+            ),
+            400:'Bad request',
+            401: "Unauthorized Request",
+            403: "Forbidden",
+            500: "Internal Server Error",
+        }
 
     )
 

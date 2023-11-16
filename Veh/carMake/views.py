@@ -11,6 +11,8 @@ from .models import VehicleMake
 from rest_framework.generics import UpdateAPIView
 from django.db.models import Q
 from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework.decorators import permission_classes
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 
 
 # Create your views here.
@@ -246,6 +248,8 @@ class TractorCarList(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
+
+@permission_classes([IsAdminUser])
 class CreateVehicle(APIView):
 
     @swagger_auto_schema(
