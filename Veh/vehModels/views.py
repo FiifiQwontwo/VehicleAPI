@@ -8,6 +8,7 @@ from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 
 
+
 # Create your views here.
 
 class ListModels(APIView):
@@ -51,7 +52,7 @@ class ListModels(APIView):
 class CreateModel(APIView):
     @swagger_auto_schema(
         operation_description="New Model",
-        request_body=openai.Schema(
+        request_body=openapi.Schema(
             type=openapi.TYPE_OBJECT,
             required=['make', 'model_naame', 'picture'],
             properties={

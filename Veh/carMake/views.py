@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from rest_framework import status
 from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
@@ -9,12 +10,15 @@ from .serializer import ListVehicleSerializers, VehicleMakeDetailsSerializer, Up
 from .models import VehicleMake
 from rest_framework.generics import UpdateAPIView
 from django.db.models import Q
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
 
 # Create your views here.
 
 
 class VehicleList(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
     @swagger_auto_schema(
         operation_description="List all Vehicles",
         responses={

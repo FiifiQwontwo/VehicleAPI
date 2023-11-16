@@ -45,22 +45,24 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_yasg',  # automatically generated swagger
     'django_seed',  # using it to seed  models data
-    'rest_framework_simplejwt',
+    # 'rest_framework_simplejwt',
     'carMake',
     'fuel_type',
     'bodytype',
-    # 'model',
+    'corsheaders',
     'vehModels',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 ]
 
 ROOT_URLCONF = 'Veh.urls'
@@ -154,9 +156,9 @@ REST_FRAMEWORK = {
 
 AUTH_USER_MODEL = 'accounts.Account'
 
-# SIMPLE_JWT = {
-#     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),
-#     'REFRESH_TOKEN_LIFETIME': timedelta(days=15),
-#     'ROTATE_REFRESH_TOKENS': 'True',
-#     'BLACKLIST_REFRESH_TOKENS': 'True',
-# }
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=15),
+    'ROTATE_REFRESH_TOKENS': 'True',
+    'BLACKLIST_REFRESH_TOKENS': 'True',
+}
