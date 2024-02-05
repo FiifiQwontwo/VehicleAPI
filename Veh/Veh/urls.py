@@ -43,7 +43,7 @@ urlpatterns = [
     path('make/', include('carMake.urls')),
     path('body/', include('bodytype.urls')),
     path('fuel/', include('fuel_type.urls')),
-    path('models/', include('vehModels.urls')),
+    path('model/', include('vehModels.urls')),
     path('swagger/', schema_view.with_ui('swagger'), name='schema-swagger-ui'),
     path('redocs/', schema_view.with_ui('redoc'), name='schema-redoc'),
 

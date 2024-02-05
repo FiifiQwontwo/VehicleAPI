@@ -19,8 +19,8 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser
 
 
 class VehicleList(APIView):
-    authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticated]
+    # authentication_classes = [JWTAuthentication]
+    # permission_classes = [IsAuthenticated]
     @swagger_auto_schema(
         operation_description="List all Vehicles",
         responses={
